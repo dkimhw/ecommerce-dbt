@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: sales #name we would use to refer to this source
+    schema: SALES #Snowflake schema name where raw data is stored
+    description: Raw Ecommerce data #data source desc. To be used in dbt documentation
+    tables:
+      - name: DATA #Snowflake table name where raw sales data is stored
+        description: Merged invoice and invoice items data #table desc. To be used in dbt documentation

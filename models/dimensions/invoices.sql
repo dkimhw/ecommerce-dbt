@@ -1,4 +1,8 @@
+with invoices as
+(SELECT DISTINCT CUSTOMERID, COUNTRY, INVOICEDATE, INVOICENO   FROM {{source('sales', 'DATA')}}),
 
-with cte as
-(SELECT DISTINCT CUSTOMERID, COUNTRY, INVOICEDATE, INVOICENO   FROM "ACME"."SALES"."DATA")
-SELECT * FROM cte
+country as
+(SELECT alpha2, en FROM {{ ref('countries') }} )
+
+SELECT invoices.*, alpha2 as county_code FROM invoices
+LEFT JOIN country on invoices.COUNTRY = country.en
